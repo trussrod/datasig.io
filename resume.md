@@ -7,7 +7,7 @@ author_profile: true
 
 You can view or download my resume below:
 
-👉 [**Download PDF**](/assets/Sigifredo Castro - CV.pdf)
+👉 [**Download Resume -(PDF)**](/assets/Sigifredo Castro - CV.pdf)
 
 ---
 
