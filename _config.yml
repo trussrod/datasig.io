@@ -1,0 +1,36 @@
+title: "Sigi Castro | Data & Analytics Engineer"
+description: "Data-powered solutions across supply chain, public sector, and network infrastructure. Python, R, SQL."
+url: "https://sigicastro.github.io" # or your GitHub Pages URL
+baseurl: "/datasig.io" # leave this if you use a custom domain
+
+# Author Info
+author:
+  name: "Sigi Castro"
+  avatar: "/assets/images/profile.jpg" # Add your profile picture here
+  bio: "Data & Analytics Engineer · Network Monitoring · Supply Chain · Python | R | SQL"
+  location: "Costa Rica"
+  email: "youremail@example.com"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-github"
+      url: "https://github.com/sigicastro"
+    - label: "LinkedIn"
+      icon: "fab fa-linkedin"
+      url: "https://linkedin.com/in/sigicastro"
+    - label: "Tableau Public"
+      icon: "fas fa-chart-bar"
+      url: "https://public.tableau.com/profile/yourname" # Optional
+    - label: "Resume"
+      icon: "fas fa-file-alt"
+      url: "/assets/resume.pdf" # Upload your resume later
+
+# Theme
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-include-cache
+
+# Build
