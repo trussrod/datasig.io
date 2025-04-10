@@ -7,7 +7,7 @@ author_profile: true
 
 I'm **Sigi Castro**, a passionate Data & Analytics Engineer from Costa Rica 🇨🇷.
 
-Over the years, I’ve worked with municipalities, optimized supply chain pipelines, and now enhance network monitoring environments for global teams. I specialize in **transforming messy or complex data into reliable solutions**, combining technical depth with domain knowledge.
+Over the years, I’ve worked with public sector, optimized supply chain pipelines, and now enhance network monitoring environments for global teams. I specialize in **transforming messy or complex data into reliable solutions**, combining technical depth with domain knowledge.
 
 ---
 
