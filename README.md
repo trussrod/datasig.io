@@ -36,7 +36,6 @@ Analyze Apple stock with Python using yfinance, matplotlib, and pandas.
 ## 📫 Let’s Connect
 
 - 💼 [LinkedIn](https://www.linkedin.com/in/sigifredocastro)
-- 🌐 [datasig.io](https://datasig.io) (if applicable)
 - 📧 Email me at: sigicb@gmail.com
 
 _Thanks for stopping by! ⭐ Feel free to explore my repositories or reach out if you'd like to collaborate._
