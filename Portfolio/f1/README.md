@@ -28,4 +28,5 @@ In this project, I analyze **Lewis Hamilton’s performance** during the **2023 
 - **Visualization**: Creating clear, insightful visualizations of Hamilton’s race performance.
 - **Python Programming**: Leveraging libraries such as `FastF1`, `Matplotlib`, `Pandas`, and `Seaborn`.
 
-## 📁 **Repository Structure**:
+## 📁 **Results**:
+- 🔗 [Jupyter notebook](Portfolio/f1/ham_silverston_2024.ipynb)
