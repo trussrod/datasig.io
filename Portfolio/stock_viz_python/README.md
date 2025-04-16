@@ -32,7 +32,7 @@ In this project, I analyze **Apple Inc. (AAPL) stock data** for the year **2023*
 ## 🧩 **Skills Demonstrated**:
 
 ## 📈 **Results**
-- [View Project](Portfolio/stock_viz_python/src/stock_analysis.ipynb)
+- [Jupyter notebook](Portfolio/stock_viz_python/src/stock_analysis.ipynb)
 
 ### Stock Price Analysis of Apple (AAPL)
 
