@@ -1,5 +1,5 @@
 # 👋 Welcome to **datasig.io**  
-> _Personal Portfolio of Sigifredo Castro_
+> _Personal Portfolio of Sigi Castro_
 
 ---
 
