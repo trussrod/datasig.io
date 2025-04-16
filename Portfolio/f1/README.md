@@ -1,12 +1,12 @@
-# 🏁 **Lewis Hamilton 2023 Silverstone Performance Analysis** 🚗
+# 🏁 **Lewis Hamilton 2024 Silverstone Performance Analysis** 🚗
 
 ## 📝 **Project Description:**
 
-In this project, I analyze **Lewis Hamilton’s performance** during the **2023 British Grand Prix** at **Silverstone**. Using **FastF1**, I retrieved and visualized key data such as race positions, lap times, and race performance across the session.
+In this project, I analyze **Lewis Hamilton’s performance** during the **2024 British Grand Prix** at **Silverstone**. Using **FastF1**, I retrieved and visualized key data such as race positions, lap times, and race performance across the session.
 
 ## 🔧 **Topics Covered:**
 
-- **Data Acquisition**: Using `fastf1` to retrieve historical F1 race data, specifically focusing on the 2023 season and the British Grand Prix (Silverstone).
+- **Data Acquisition**: Using `fastf1` to retrieve historical F1 race data, specifically focusing on the 2024 season and the British Grand Prix (Silverstone).
   
 - **Data Filtering**: Filtering race results to focus on **Lewis Hamilton’s performance** by extracting his race data through driver abbreviation `HAM`.
 
