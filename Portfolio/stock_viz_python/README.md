@@ -27,4 +27,29 @@ In this project, I analyze **Apple Inc. (AAPL) stock data** for the year **2023*
 ## 🧩 **Skills Demonstrated**:
 - **Financial Data Analysis**: Retrieving and analyzing stock data to identify market trends.
 - **Data Visualization**: Creating insightful and informative visualizations to understand stock price movements.
-- **Python Programming**: Utilizing libraries such as `yfinance`, `Matplotlib
+- **Python Programming**: Utilizing libraries such as `yfinance`, `Matplotlib`, and `Pandas` for financial analysis.
+
+## 🧩 **Skills Demonstrated**:
+
+## 📈 **Results**
+- [View Project](Portfolio/stock_viz_python/src/stock_analysis.ipynb)
+
+### Stock Price Analysis of Apple (AAPL)
+
+```python
+import yfinance as yf
+import matplotlib.pyplot as plt
+
+# Download Apple stock data for 2023
+stock_data = yf.download('AAPL', start='2023-01-01', end='2023-12-31')
+
+# Plotting the closing prices
+plt.figure(figsize=(10,5))
+plt.plot(stock_data['Close'], label='AAPL Closing Price')
+plt.title('Apple Stock Price (2023)')
+plt.xlabel('Date')
+plt.ylabel('Price (USD)')
+plt.legend()
+plt.show()
+
+
