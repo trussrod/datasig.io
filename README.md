@@ -31,6 +31,10 @@ Analyze Apple stock with Python using yfinance, matplotlib, and pandas.
 - 🔗 [View Project](Portfolio/stock_viz_python/src/stock_analysis.ipynb)
 - 📌 Topics: Time series, moving averages, volume analysis
 
+### 📊 Lewis Hamilton 2024 Silverstone Performance Analysis 🚗
+- 🔗 [View Project](Portfolio/f1/ham_silverston_2024.ipynb)
+- 📌 Topics: Data Acquisition, filtering, Visualization
+
 ---
 
 ## 📫 Let’s Connect
