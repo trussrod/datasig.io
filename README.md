@@ -1,18 +1,38 @@
-# datasig.io
-Personal Repository
+# 👋 Welcome to **datasig.io**  
+> _Personal Portfolio of Sigifredo Castro_
 
 ---
 
-You can view or download my resume below:
+🎯 **Data & Analytics Engineer**  
+Experienced in delivering end-to-end data solutions across diverse industries — from municipalities and supply chains to network infrastructure.
 
-👉 [**Download Resume -(PDF)**](/assets/Sigifredo Castro - CV.pdf)
+📄 [**Download Resume (PDF)**](/assets/Sigifredo%20Castro%20-%20CV.pdf)
 
 ---
 
-### 🧩 Highlights
+## 🚀 Highlights
 
-- 🛠️  Strong in Python, R, SQL, Power BI, Tableau
-- 🌐  Experience with REST APIs and network monitoring tools
-- 🏛️  Worked with municipalities, supply chain, and network infrastructure
-- 💬  Communicates well with technical and non-technical audiences
-- :file_folder:  Semistructure data, YAML, JSON.
+- 🐍 **Languages & Tools:** Python, R, SQL, Power BI, Tableau  
+- 🌐 **Technical Expertise:** REST APIs, YAML, JSON, network monitoring  
+- 🧠 **Domains:** Goverment projects, supply chain analytics, infrastructure monitoring  
+- 🗣️ **Strengths:** Communicates clearly with both technical and non-technical audiences and adaptability
+
+---
+
+## 📌 About Me
+
+Hi! I'm Sigi Castro, a Data & Analytics Engineer passionate about turning complexity into clarity. Whether it’s designing ETL pipelines, creating insightful dashboards, or translating business questions into technical solutions — I’m all about making data useful.
+
+---
+
+## 📫 Let’s Connect
+
+- 💼 [LinkedIn](https://www.linkedin.com/in/sigifredocastro)
+- 🌐 [datasig.io](https://datasig.io) (if applicable)
+- 📧 Email me at: sigicb@gmail.com
+
+---
+
+_Thanks for stopping by! ⭐ Feel free to explore my repositories or reach out if you'd like to collaborate._
+
+
