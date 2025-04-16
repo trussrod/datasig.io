@@ -32,6 +32,7 @@ Analyze Apple stock with Python using yfinance, matplotlib, and pandas.
 - 📌 Topics: Time series, moving averages, volume analysis
 
 ### 📊 Lewis Hamilton 2024 Silverstone Performance Analysis 🚗
+Analyze Lewis Hamilton’s performance during the 2024 British Grand Prix at Silverstone using FastF1.
 - 🔗 [View Project](Portfolio/f1/ham_silverston_2024.ipynb)
 - 📌 Topics: Data Acquisition, filtering, Visualization
 
