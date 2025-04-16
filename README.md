@@ -24,14 +24,20 @@ Experienced in delivering end-to-end data solutions across diverse industries �
 Hi! I'm Sigi Castro, a Data & Analytics Engineer passionate about turning complexity into clarity. Whether it’s designing ETL pipelines, creating insightful dashboards, or translating business questions into technical solutions — I’m all about making data useful.
 
 ---
+## 📂 Projects
+
+### 📊 Stock Market Analysis
+Analyze Apple stock with Python using yfinance, matplotlib, and pandas.
+- 🔗 [View Project](Portfolio/stock_viz_python/src/stock_analysis.ipynb)
+- 📌 Topics: Time series, moving averages, volume analysis
+
+---
 
 ## 📫 Let’s Connect
 
 - 💼 [LinkedIn](https://www.linkedin.com/in/sigifredocastro)
 - 🌐 [datasig.io](https://datasig.io) (if applicable)
 - 📧 Email me at: sigicb@gmail.com
-
----
 
 _Thanks for stopping by! ⭐ Feel free to explore my repositories or reach out if you'd like to collaborate._
 
