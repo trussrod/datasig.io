@@ -43,6 +43,6 @@ Analyze Lewis Hamilton’s performance during the 2024 British Grand Prix at Sil
 - 💼 [LinkedIn](https://www.linkedin.com/in/sigifredocastro)
 - 📧 Email me at: sigicb@gmail.com
 
-_Thanks for stopping by! ⭐ Feel free to explore my repositories or reach out if you'd like to collaborate._
+_Thanks for stopping by! ⭐ Feel free to explore my projects or reach out if you'd like to collaborate._
 
 
