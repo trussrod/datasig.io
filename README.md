@@ -4,7 +4,7 @@
 ---
 
 🎯 **Data & Analytics Engineer**  
-Experienced in delivering end-to-end data solutions across diverse industries — from municipalities and supply chains to network infrastructure.
+Experienced in delivering end-to-end data solutions across diverse industries — from goverment and supply chains to network infrastructure.
 
 📄 [**Download Resume (PDF)**](/assets/Sigifredo%20Castro%20-%20CV.pdf)
 
