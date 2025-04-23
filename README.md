@@ -36,6 +36,11 @@ Analyze Lewis Hamilton’s performance during the 2024 British Grand Prix at Sil
 - 🔗 [View Project](Portfolio/f1/README.md)
 - 📌 Topics: Data Acquisition, filtering, Visualization
 
+### 📈 Product Performance Analytics Dashboard 🛒
+Transform raw e-commerce data into actionable product insights with this SQL ETL pipeline.
+- 🔗 [View Project](Portfolio/SQL/README.md)
+- 📌 Topics: Dimensional Modeling, ETL Development, Time-Series Analytics
+
 ---
 
 ## 📫 Let’s Connect
