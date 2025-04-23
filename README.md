@@ -1,4 +1,8 @@
 # 👋 Welcome to **datasig.io**  
+
+![Header](https://img.shields.io/badge/Data-Analytics-blue) 
+![Profile](https://img.shields.io/badge/Engineering-Portfolio-green) 
+![Status](https://img.shields.io/badge/Active-Updating-brightgreen)
 > _Personal Portfolio of Sigi Castro_
 
 ---
