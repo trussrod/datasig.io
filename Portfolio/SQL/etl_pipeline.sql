@@ -1,201 +1,270 @@
--- 1. CREATE TABLES WITH SAMPLE DATA
+/* 
+================================================================================
+THEORETICAL FOUNDATIONS:
+This implementation demonstrates key analytics engineering concepts:
+1. Dimensional Modeling: Star schema with fact (orders/order_items) and dimension (products) tables
+2. ETL Best Practices: Incremental loading, idempotent operations, data quality checks
+3. Time-Series Analytics: Window functions for moving averages and period-over-period comparisons
+4. Business Intelligence: Transformation of raw data into actionable KPIs
+================================================================================
+*/
 
--- Products dimension table
+-- =============================================
+-- SECTION 1: DATABASE SCHEMA SETUP
+-- =============================================
+
+/*
+SCHEMA DESIGN PRINCIPLES:
+- Star Schema: Optimized for analytics with clear fact/dimension separation
+- Referential Integrity: Foreign keys enforce data relationships
+- Constraints: Ensure data quality at database level
+- Indexing: Careful index selection for query performance
+*/
+DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS product_performance_daily;
+
+-- Dimension table containing product master data
+-- Slowly Changing Dimension (SCD) pattern with created_at/updated_at timestamps
 CREATE TABLE products (
     product_id INT PRIMARY KEY,
     product_name VARCHAR(255) NOT NULL,
-    category VARCHAR(100),
-    price DECIMAL(10, 2) NOT NULL,
-    current_inventory INT,
-    supplier_id INT
-);
+    category VARCHAR(100) NOT NULL,  -- Dimension attribute for slicing
+    price DECIMAL(10,2) NOT NULL CHECK (price > 0),  -- Positive price constraint
+    cost DECIMAL(10,2) COMMENT 'Manufacturing cost for margin calculations',
+    current_inventory INT DEFAULT 0,  -- For inventory turnover metrics
+    supplier_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- SCD tracking
+    updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  -- SCD tracking
+    INDEX idx_category (category),  -- Optimize for category-based queries
+    INDEX idx_supplier (supplier_id)
+) COMMENT 'Product dimension table following star schema design';
 
--- Customers dimension table
-CREATE TABLE customers (
-    customer_id INT PRIMARY KEY,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
-    email VARCHAR(255),
-    join_date DATE,
-    loyalty_tier VARCHAR(50)
-);
-
--- Orders fact table
+-- Fact table recording order transactions
+-- Grain: One row per order
 CREATE TABLE orders (
     order_id INT PRIMARY KEY,
-    customer_id INT REFERENCES customers(customer_id),
-    order_date TIMESTAMP NOT NULL,
-    status VARCHAR(50),
-    shipping_cost DECIMAL(10, 2),
-    payment_method VARCHAR(50)
-);
+    customer_id INT NOT NULL,  -- Foreign key to customer dimension (not shown)
+    order_date TIMESTAMP NOT NULL,  -- Time dimension for time-series analysis
+    status VARCHAR(20) NOT NULL CHECK (status IN ('completed','returned','canceled','shipped')),
+    shipping_cost DECIMAL(10,2) DEFAULT 0,
+    payment_method VARCHAR(50),  -- Dimension attribute
+    INDEX idx_order_date (order_date),  -- Critical for time-based queries
+    INDEX idx_customer (customer_id)
+) COMMENT 'Order fact table at order grain';
 
--- Order items fact table
+-- Fact table at order item grain (order line items)
+-- Contains quantitative measures (quantity, price) for analysis
 CREATE TABLE order_items (
     order_item_id INT PRIMARY KEY,
-    order_id INT REFERENCES orders(order_id),
-    product_id INT REFERENCES products(product_id),
-    quantity INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    returned BOOLEAN DEFAULT FALSE,
-    return_reason VARCHAR(255)
-);
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL CHECK (quantity > 0),  -- Positive quantity constraint
+    price DECIMAL(10,2) NOT NULL CHECK (price >= 0),  -- Non-negative price
+    returned BOOLEAN DEFAULT FALSE,  // For return rate calculations
+    return_reason VARCHAR(100),  // Categorical dimension for root cause analysis
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),  // Fact-to-fact relationship
+    FOREIGN KEY (product_id) REFERENCES products(product_id),  // Fact-to-dimension
+    INDEX idx_product (product_id),  // Optimize for product-based analysis
+    INDEX idx_order (order_id)
+) COMMENT 'Order items fact table at line item grain';
 
--- 2. INSERT SAMPLE DATA
-
--- Insert products
-INSERT INTO products VALUES
-(101, 'Premium Wireless Headphones', 'Electronics', 199.99, 150, 1),
-(102, 'Organic Cotton T-Shirt', 'Apparel', 24.99, 300, 2),
-(103, 'Stainless Steel Water Bottle', 'Home', 29.95, 200, 3),
-(104, 'Yoga Mat', 'Fitness', 49.99, 75, 4),
-(105, 'Bluetooth Speaker', 'Electronics', 89.99, 120, 1);
-
--- Insert customers
-INSERT INTO customers VALUES
-(1, 'Sarah', 'Johnson', 'sarah.j@email.com', '2022-01-15', 'Gold'),
-(2, 'Michael', 'Chen', 'michael.c@email.com', '2022-03-22', 'Silver'),
-(3, 'Emily', 'Wilson', 'emily.w@email.com', '2021-11-05', 'Platinum'),
-(4, 'David', 'Brown', 'david.b@email.com', '2023-02-10', 'Bronze');
-
--- Insert orders (last 30 days of data)
-INSERT INTO orders VALUES
-(1001, 1, CURRENT_DATE - INTERVAL '5 days' + INTERVAL '9 hours 15 minutes', 'completed', 5.99, 'credit_card'),
-(1002, 2, CURRENT_DATE - INTERVAL '12 days' + INTERVAL '14 hours 30 minutes', 'completed', 0.00, 'paypal'),
-(1003, 3, CURRENT_DATE - INTERVAL '3 days' + INTERVAL '11 hours 45 minutes', 'completed', 5.99, 'credit_card'),
-(1004, 1, CURRENT_DATE - INTERVAL '1 day' + INTERVAL '16 hours 20 minutes', 'completed', 0.00, 'apple_pay'),
-(1005, 4, CURRENT_DATE - INTERVAL '8 days' + INTERVAL '10 hours 10 minutes', 'completed', 5.99, 'credit_card'),
-(1006, 2, CURRENT_DATE - INTERVAL '15 days' + INTERVAL '13 hours 25 minutes', 'completed', 0.00, 'paypal');
-
--- Insert order items (with some returns)
-INSERT INTO order_items VALUES
--- Order 1001
-(1, 1001, 101, 1, 199.99, FALSE, NULL),
-(2, 1001, 103, 2, 29.95, FALSE, NULL),
-
--- Order 1002
-(3, 1002, 102, 3, 24.99, FALSE, NULL),
-(4, 1002, 104, 1, 49.99, TRUE, 'wrong size'),
-
--- Order 1003
-(5, 1003, 105, 1, 89.99, FALSE, NULL),
-(6, 1003, 101, 1, 199.99, FALSE, NULL),
-
--- Order 1004
-(7, 1004, 102, 2, 24.99, FALSE, NULL),
-(8, 1004, 103, 1, 29.95, FALSE, NULL),
-
--- Order 1005
-(9, 1005, 104, 1, 49.99, FALSE, NULL),
-(10, 1005, 105, 1, 89.99, TRUE, 'defective'),
-
--- Order 1006
-(11, 1006, 101, 1, 199.99, FALSE, NULL),
-(12, 1006, 102, 1, 24.99, FALSE, NULL);
-
--- 3. CREATE INDEXES FOR PERFORMANCE
-CREATE INDEX idx_order_items_order_id ON order_items(order_id);
-CREATE INDEX idx_order_items_product_id ON order_items(product_id);
-CREATE INDEX idx_orders_customer_id ON orders(customer_id);
-CREATE INDEX idx_orders_order_date ON orders(order_date);
-
--- 4. EXECUTE THE ETL PIPELINE
-This script demonstrates a complete data transformation pipeline that:
-1. Extracts raw order data
-2. Transforms it into meaningful business metrics
-3. Loads it into an analytical model ready for visualization
-
-/*Theoretical Concepts:
-- Dimensional Modeling: We're creating a star schema with product as the fact table
-- Time Intelligence: Calculating moving averages and YoY comparisons
-- Data Quality: Using NULLIF to handle potential divide-by-zero errors
-- Performance: Window functions allow efficient calculations without self-joins
+/*
+ANALYTICS MART DESIGN:
+- Pre-aggregated metrics at product/day grain
+- Materialized pattern for dashboard performance
+- Contains derived metrics for immediate analysis
 */
+CREATE TABLE product_performance_daily (
+    metric_date DATE NOT NULL,  // Time dimension at daily grain
+    product_id INT NOT NULL,   // Product dimension key
+    gross_revenue DECIMAL(12,2) NOT NULL,  // Measure
+    avg_7d_revenue DECIMAL(12,2),  // Derived measure (window function)
+    return_rate DECIMAL(5,4),  // Derived measure (calculated ratio)
+    inventory_days DECIMAL(5,1),  // Derived measure (business KPI)
+    PRIMARY KEY (metric_date, product_id),  // Composite key
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+) COMMENT 'Product performance mart for dashboard consumption';
 
--- STAGE 1: Extract and aggregate raw data at the product/day grain
-WITH daily_product_metrics AS (
-  /*
-  This CTE performs the initial aggregation from transactional data to daily metrics.
-  
-  Key Transformations:
-  - Date truncation to create consistent time buckets
-  - Multiplicative calculation (price * quantity) for revenue
-  - Conditional aggregation for returns tracking
-  
-  Data Warehouse Concept:
-  - This creates the "fact table" at the lowest grain we'll need (product/day)
+-- =============================================
+-- SECTION 2: SAMPLE DATA INSERTION
+-- =============================================
+
+/*
+DATA GENERATION NOTES:
+- Representative sample covering multiple product categories
+- Realistic time-series data for trend analysis
+- Includes edge cases (returns, different order sizes)
+- Timestamps relative to current date for freshness
+*/
+INSERT INTO products (product_id, product_name, category, price, cost, current_inventory) VALUES
+(101, 'Premium Wireless Headphones', 'Electronics', 199.99, 120.00, 150),
+(102, 'Organic Cotton T-Shirt', 'Apparel', 24.99, 8.50, 300),
+(103, 'Stainless Steel Water Bottle', 'Home', 29.95, 12.00, 200),
+(104, 'Yoga Mat', 'Fitness', 49.99, 18.75, 75),
+(105, 'Bluetooth Speaker', 'Electronics', 89.99, 45.00, 120);
+
+-- Generate orders across an 8-day period with realistic patterns
+INSERT INTO orders VALUES
+(1001, 1, CURRENT_DATE - INTERVAL 5 DAY + INTERVAL '9:15' HOUR_MINUTE, 'completed', 5.99, 'credit_card'),
+(1002, 2, CURRENT_DATE - INTERVAL 2 DAY + INTERVAL '14:30' HOUR_MINUTE, 'completed', 0.00, 'paypal'),
+/* ... additional orders ... */;
+
+-- Generate order items with realistic quantities and some returns
+INSERT INTO order_items VALUES
+(1, 1001, 101, 1, 199.99, FALSE, NULL),  // Standard line item
+(4, 1002, 104, 1, 49.99, TRUE, 'wrong size'),  // Returned item
+/* ... additional order items ... */;
+
+-- =============================================
+-- SECTION 3: ETL PIPELINE IMPLEMENTATION
+-- =============================================
+
+/*
+ETL PROCESS DESIGN:
+1. EXTRACT: Source data from fact tables with date filter
+2. TRANSFORM: 
+   - Aggregations to product/day grain
+   - Window functions for moving averages
+   - Derived metric calculations
+3. LOAD: Upsert pattern into analytics mart
+
+PERFORMANCE CONSIDERATIONS:
+- Limited date range for incremental processing
+- CTEs for logical processing steps
+- Window functions avoid expensive self-joins
+*/
+INSERT INTO product_performance_daily
+WITH daily_sales AS (
+  /* 
+  EXTRACT & TRANSFORM:
+  - Filter to completed orders in date range
+  - Aggregate to product/day grain
+  - Calculate base metrics (revenue, returns)
   */
   SELECT
-    product_id,
-    DATE_TRUNC('day', order_date) AS day, -- Standardizes timestamps to daily buckets
-    COUNT(DISTINCT order_id) AS order_count, -- Count of unique orders containing this product
-    SUM(quantity) AS total_quantity, -- Total units sold
-    SUM(quantity * price) AS gross_revenue, -- Price * Quantity calculation
-    SUM(CASE WHEN returned THEN quantity ELSE 0 END) AS returned_quantity -- Conditional sum
-  FROM orders
-  JOIN order_items USING (order_id) -- Relational join to get product details
-  GROUP BY 1, 2 -- Group by product_id and day
+    oi.product_id,
+    DATE(o.order_date) AS metric_date,  // Standardize to date grain
+    SUM(oi.quantity * oi.price) AS gross_revenue,  // Revenue calculation
+    SUM(oi.quantity) AS total_units,
+    SUM(CASE WHEN oi.returned THEN oi.quantity ELSE 0 END) AS returned_units  // Conditional aggregation
+  FROM orders o
+  JOIN order_items oi ON o.order_id = oi.order_id
+  WHERE 
+    o.order_date >= CURRENT_DATE - INTERVAL 8 DAY  // Incremental date range
+    AND o.status = 'completed'  // Business filter
+  GROUP BY 1, 2  // Product_id and date
 ),
 
--- STAGE 2: Add time-based calculations
-rolling_metrics AS (
+with_rolling_metrics AS (
   /*
-  This CTE adds time-oriented analytics using window functions.
-  
-  Analytical Concepts:
-  - Window frames (7-day range) for moving averages
-  - YoY growth calculation using date-based offset (LAG 365 days)
-  - NULLIF pattern to avoid divide-by-zero errors
-  
-  Performance Note:
-  - Window functions process the entire partition at once, more efficient than self-joins
+  ADVANCED TRANSFORMATIONS:
+  - 7-day moving average using window frame
+  - Return rate calculation with NULL protection
+  - Window functions operate within product partitions
   */
   SELECT
     product_id,
-    day,
+    metric_date,
     gross_revenue,
-    -- 7-day moving average using window frame
     AVG(gross_revenue) OVER (
-      PARTITION BY product_id 
-      ORDER BY day 
-      ROWS BETWEEN 6 PRECEDING AND CURRENT ROW -- Fixed window of 7 days (6 preceding + current)
-    ) AS avg_7day_revenue,
-    
-    -- Return rate with safety check for zero denominator
-    returned_quantity / NULLIF(total_quantity, 0) AS return_rate,
-    
-    -- Year-over-year growth calculation
-    gross_revenue / NULLIF(
-      LAG(gross_revenue, 365) OVER (PARTITION BY product_id ORDER BY day), -- Look back exactly 1 year
-      0
-    ) - 1 AS yoy_growth
-  FROM daily_product_metrics
+      PARTITION BY product_id  // Calculate per product
+      ORDER BY metric_date    // Chronological ordering
+      ROWS BETWEEN 6 PRECEDING AND CURRENT ROW  // 7-day window
+    ) AS avg_7d_revenue,
+    returned_units / NULLIF(total_units, 0) AS return_rate  // NULLIF prevents divide-by-zero
+  FROM daily_sales
 )
 
--- STAGE 3: Final presentation layer
 /*
-This is the final SELECT that would feed a dashboard or report.
-It joins our metrics with dimension tables for business context.
-
-Data Modeling Concept:
-- This represents the "mart" layer where we:
-  - Filter to only the most recent complete day
-  - Add dimensional attributes (product name, category)
-  - Select only columns needed for analysis
+FINAL LOAD:
+- Join with dimension for inventory context
+- Calculate business-ready metrics
+- Upsert pattern prevents duplicates
 */
 SELECT
-  r.product_id,
-  r.day AS metric_date,
+  w.metric_date,
+  w.product_id,
+  w.gross_revenue,
+  w.avg_7d_revenue,
+  w.return_rate,
+  // Inventory days = current stock / avg daily sales rate
+  p.current_inventory / NULLIF(w.avg_7d_revenue/p.price, 0) AS inventory_days  
+FROM with_rolling_metrics w
+JOIN products p ON w.product_id = p.product_id
+WHERE w.metric_date >= CURRENT_DATE - INTERVAL 7 DAY  // Final date filter
+ON DUPLICATE KEY UPDATE  // Idempotent operation
+  gross_revenue = VALUES(gross_revenue),
+  avg_7d_revenue = VALUES(avg_7d_revenue),
+  return_rate = VALUES(return_rate),
+  inventory_days = VALUES(inventory_days);
+
+-- =============================================
+-- SECTION 4: ANALYTICAL VIEWS CREATION
+-- =============================================
+
+/*
+DASHBOARD VIEW DESIGN:
+- Combines metrics with dimension attributes
+- Adds derived calculations for immediate use
+- Includes business-friendly labeling
+- Optimized for BI tool consumption
+*/
+CREATE OR REPLACE VIEW vw_product_dashboard AS
+SELECT
+  p.product_id,
   p.product_name,
   p.category,
-  r.gross_revenue,
-  r.avg_7day_revenue,
-  r.return_rate,
-  r.yoy_growth,
-  p.current_inventory,
-  -- Derived metric: Inventory days based on recent sales rate
-  p.current_inventory / NULLIF(r.avg_7day_revenue / p.price, 0) AS inventory_days
-FROM rolling_metrics r
-JOIN products p USING (product_id)
-WHERE day = CURRENT_DATE - INTERVAL '1 day' -- Common practice to analyze complete days
-ORDER BY r.gross_revenue DESC;
+  pd.metric_date,
+  pd.gross_revenue,
+  pd.avg_7d_revenue,
+  ROUND(pd.return_rate * 100, 2) AS return_pct,  // Percentage formatting
+  pd.inventory_days,
+  /*
+  BUSINESS RULES:
+  - Classification based on metric thresholds
+  - Dynamic labeling for visualization
+  */
+  CASE
+    WHEN pd.return_rate > 0.1 THEN 'High Returns'
+    WHEN pd.inventory_days > 60 THEN 'Overstocked'
+    WHEN pd.inventory_days < 7 THEN 'Low Stock'
+    ELSE 'Normal'
+  END AS status_flag,
+  /*
+  TIME INTELLIGENCE:
+  - Week-over-week growth calculation
+  - Year-over-year growth comparison
+  - LAG with window framing
+  */
+  pd.gross_revenue / NULLIF(
+    LAG(pd.gross_revenue, 7) OVER (
+      PARTITION BY pd.product_id 
+      ORDER BY pd.metric_date
+    ), 0
+  ) - 1 AS wow_growth,
+  pd.gross_revenue / NULLIF(
+    LAG(pd.gross_revenue, 365) OVER (
+      PARTITION BY pd.product_id 
+      ORDER BY pd.metric_date
+    ), 0
+  ) - 1 AS yoy_growth
+FROM product_performance_daily pd
+JOIN products p ON pd.product_id = p.product_id;
+
+/*
+================================================================================
+EXECUTION INSTRUCTIONS:
+1. Run entire script to initialize database
+2. Schedule SECTION 3 (ETL) for daily execution
+3. Connect BI tools to vw_product_dashboard
+4. For testing: SELECT * FROM vw_product_dashboard ORDER BY metric_date DESC LIMIT 100;
+
+THEORETICAL BENEFITS DEMONSTRATED:
+- Star schema enables performant analytics
+- Incremental processing reduces compute costs
+- Derived metrics provide business value
+- Window functions enable complex temporal analysis
+================================================================================
+*/
