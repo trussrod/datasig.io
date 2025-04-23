@@ -41,6 +41,11 @@ Transform raw e-commerce data into actionable product insights with this SQL ETL
 - 🔗 [View Project](Portfolio/SQL/README.md)
 - 📌 Topics: Dimensional Modeling, ETL Development, Time-Series Analytics
 
+### 🚀 Marketing Campaign Analysis (Tableau)
+Interactive visualization of key sales metrics and regional performance trends.
+- 🔗 [View Project](https://public.tableau.com/app/profile/sigifredo.castro/viz/Test_17199399519080/Dashboard1)
+- 📌 Insights: Regional comparisons, sales trends, performance metrics
+
 ---
 
 ## 📫 Let’s Connect
