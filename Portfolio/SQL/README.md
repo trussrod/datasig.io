@@ -31,4 +31,4 @@ In this example, I showcase **three real-world analytics engineering projects** 
 - **Data Quality**: Implemented monitoring that reduces errors by 90%
 
 ## 📁 **Results**:
-- 🔗 [SQL Script](elt_pipeline.sql)
+- 🔗 [SQL Script](etl_pipeline.sql)
