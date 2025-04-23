@@ -1,8 +1,5 @@
 # 👋 Welcome to **datasig.io**  
 
-![Header](https://img.shields.io/badge/Data-Analytics-blue) 
-![Profile](https://img.shields.io/badge/Engineering-Portfolio-green) 
-![Status](https://img.shields.io/badge/Active-Updating-brightgreen)
 > _Personal Portfolio of Sigi Castro_
 
 ---
@@ -49,6 +46,20 @@ Transform raw e-commerce data into actionable product insights with this SQL ETL
 Interactive visualization of key sales metrics and regional performance trends.
 - 🔗 [View Project](https://public.tableau.com/app/profile/sigifredo.castro/viz/Test_17199399519080/Dashboard1)
 - 📌 Insights: Regional comparisons, sales trends, performance metrics
+
+## 🏆 Digital Badges
+[![Skillsoft Badges](https://img.shields.io/badge/Skillsoft-Certified-gold?logo=knowledgebase)](https://skillsoft.digitalbadges.skillsoft.com/profile/sigifredocastro457802/wallet)
+
+_Digital Wallet with all the earned certifications:_ [Link](https://skillsoft.digitalbadges.skillsoft.com/profile/sigifredocastro457802/wallet)
+
+**Officially Earned Certifications:**
+- [Business Analysis Overview](https://skillsoft.digitalbadges.skillsoft.com/9b4a48b9-16ef-42e1-8edc-30d36c07f1e0#acc.xQqbagEA)
+- [Power BI Desktop for Data Analysis](https://skillsoft.digitalbadges.skillsoft.com/fac4c8b7-4bac-47f9-8da6-575f04fa15bd#acc.N0Uo1mRi)
+- [Modern Data Management: Data Management Systems](https://skillsoft.digitalbadges.skillsoft.com/049ebc73-70d2-4b8b-b4d4-cb547e222ced#acc.JA781YxO)
+- [Data Mining and Decision Making](https://skillsoft.digitalbadges.skillsoft.com/7b291a3c-39da-4338-a079-3db6fad047cf#acc.sq2gcUOe)
+- [The Language of DevOps: DevOps Principles & Practices](https://skillsoft.digitalbadges.skillsoft.com/3d89e540-c4da-4fa8-9b28-8611959c644c#acc.e9RXFIuK)
+
+*Click any badge to verify credentials*
 
 ---
 
