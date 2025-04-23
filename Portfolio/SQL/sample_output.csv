@@ -1,0 +1,13 @@
+product_id,product_name,category,metric_date,gross_revenue,avg_7d_revenue,return_rate,inventory_days
+101,Wireless Headphones,Electronics,2023-12-01,12599.85,11850.20,0.024,45
+101,Wireless Headphones,Electronics,2023-12-02,14250.40,12375.60,0.022,42
+101,Wireless Headphones,Electronics,2023-12-03,15200.10,13100.30,0.025,39
+102,Yoga Mat,Fitness,2023-12-01,3249.95,3100.80,0.085,28
+102,Yoga Mat,Fitness,2023-12-02,2895.50,3050.25,0.092,26
+102,Yoga Mat,Fitness,2023-12-03,3100.75,2995.60,0.088,24
+103,Coffee Maker,Home,2023-12-01,6295.40,6050.30,0.015,65
+103,Coffee Maker,Home,2023-12-02,7125.60,6350.45,0.012,62
+103,Coffee Maker,Home,2023-12-03,6895.30,6580.20,0.014,59
+104,Bluetooth Speaker,Electronics,2023-12-01,8990.25,8540.75,0.018,38
+104,Bluetooth Speaker,Electronics,2023-12-02,9250.40,8725.60,0.020,35
+104,Bluetooth Speaker,Electronics,2023-12-03,9425.10,8950.30,0.019,33
