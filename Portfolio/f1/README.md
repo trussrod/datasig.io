@@ -29,4 +29,4 @@ In this project, I analyze **Lewis Hamilton’s performance** during the **2024 
 - **Python Programming**: Leveraging libraries such as `FastF1`, `Matplotlib`, `Pandas`, and `Seaborn`.
 
 ## 📁 **Results**:
-- 🔗 [Jupyter notebook](Portfolio/f1/ham_silverston_2024.ipynb)
+- 🔗 [Jupyter notebook](ham_silverston_2024.ipynb)
