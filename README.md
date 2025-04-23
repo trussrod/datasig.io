@@ -26,17 +26,17 @@ Hi! I'm Sigi Castro, a Data & Analytics Engineer passionate about turning comple
 ---
 ## 📂 Projects
 
-### 📊 Stock Market Analysis
+### 📊 Stock Market Analysis (Python)
 Analyze Apple stock with Python using yfinance, matplotlib, and pandas.
 - 🔗 [View Project](Portfolio/stock_viz_python/README.md)
 - 📌 Topics: Time series, moving averages, volume analysis
 
-### 📊 Lewis Hamilton 2024 Silverstone Performance Analysis 🚗
+### 📊 Lewis Hamilton 2024 Silverstone Performance Analysis (Python) 🚗
 Analyze Lewis Hamilton’s performance during the 2024 British Grand Prix at Silverstone using FastF1.
 - 🔗 [View Project](Portfolio/f1/README.md)
 - 📌 Topics: Data Acquisition, filtering, Visualization
 
-### 📈 Product Performance Analytics Dashboard 🛒
+### 📈 Product Performance Analytics Dashboard (SQL) 🛒
 Transform raw e-commerce data into actionable product insights with this SQL ETL pipeline.
 - 🔗 [View Project](Portfolio/SQL/README.md)
 - 📌 Topics: Dimensional Modeling, ETL Development, Time-Series Analytics
