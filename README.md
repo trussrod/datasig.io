@@ -47,6 +47,11 @@ Interactive visualization of key sales metrics and regional performance trends.
 - 🔗 [View Project](https://public.tableau.com/app/profile/sigifredo.castro/viz/Test_17199399519080/Dashboard1)
 - 📌 Insights: Regional comparisons, sales trends, performance metrics
 
+### 🚀 Supply Chain - Vessel Line up and Demurrage (Tableau)
+Visual representation of maritime logistics, focusing on vessel scheduling and demurrage charges.
+- 🔗 [View Project](https://public.tableau.com/app/profile/sigifredo.castro/viz/VesselLine-UpDemurrage/VesselLine-up)
+- 📌 Insights: Vessel Traffic and Scheduling Optimization, Port Performance and Efficiency, performance metrics.
+
 ## 🏆 Digital Badges
 [![Skillsoft Badges](https://img.shields.io/badge/Skillsoft-Certified-gold?logo=knowledgebase)](https://skillsoft.digitalbadges.skillsoft.com/profile/sigifredocastro457802/wallet)
 
