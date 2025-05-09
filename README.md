@@ -25,6 +25,16 @@ Experienced in delivering end-to-end data solutions across diverse industries �
 Hi! I'm Sigi Castro, a Data & Analytics Engineer passionate about turning complexity into clarity. Whether it’s designing ETL pipelines, creating insightful dashboards, or translating business questions into technical solutions — I’m all about making data useful.
 
 ---
+
+## ** ☁️ Cloud & Deployment**  
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+
+- Built full-stack apps with **Supabase** (Auth, PostgreSQL, Storage)  
+- Deployed scalable web services on **Render** (Web Services, CI/CD)  
+- Developed data dashboards with **Streamlit** (Python, Plotly, Caching)  
+---
 ## 📂 Projects
 
 ### 📊 Stock Market Analysis (Python)
