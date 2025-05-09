@@ -16,7 +16,7 @@ Experienced in delivering end-to-end data solutions across diverse industries �
 - 🐍 **Languages & Tools:** Python, R, SQL, Power BI, Tableau  
 - 🌐 **Technical Expertise:** REST APIs, YAML, JSON, network monitoring, finance.  
 - 🧠 **Domains:** Goverment projects, supply chain analytics, infrastructure monitoring  
-- 🗣️ **Strengths:** Communicates clearly with both technical and non-technical audiences and adaptability
+- 🗣️ **Strengths:** Communicates clearly with both technical and non-technical audiences, highly adaptable, always learning.
 
 ---
 
