@@ -32,10 +32,10 @@ Analyze Apple stock with Python using yfinance, matplotlib, and pandas.
 - 🔗 [View Project](Portfolio/stock_viz_python/README.md)
 - 📌 Topics: Time series, moving averages, volume analysis
 
-### 📊 Lewis Hamilton 2024 Silverstone Performance Analysis (Python) 🚗
-Analyze Lewis Hamilton’s performance during the 2024 British Grand Prix at Silverstone using FastF1.
-- 🔗 [View Project](Portfolio/f1/README.md)
-- 📌 Topics: Data Acquisition, filtering, Visualization
+### 📊 Supply Chain KPI Dashboard Generator (Python + Supabase + Render) 🚗
+A web app where users input raw supply chain data (e.g., Excel/CSV) and get an automated KPI dashboard (e.g., delivery times, inventory turnover).
+- 🔗 [View Project](https://github.com/trussrod/supplychain-dashboard)
+- 📌 Topics: Python, Streamlit, Supabase, Plotly, KPI's, End-to-End Development.
 
 ### 📈 Product Performance Analytics Dashboard (SQL) 🛒
 Transform raw e-commerce data into actionable product insights with this SQL ETL pipeline.
